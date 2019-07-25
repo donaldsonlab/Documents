@@ -84,4 +84,3 @@ Then launch the `PSMoveConfigTool.exe` and open the "Tracker Settings" and "Test
 
 Also when the PS Eye camera is recording you should see the red LED turn on. Sometimes this light will get stuck on in the event of an application crash. Most of the time it won't matter, but you can reset the camera simply by unplugging it and then plugging it back in again.
 
-[[images/Recording.jpg]]
