@@ -1,4 +1,8 @@
-## EnginFrame
+# Deep Lab Cut - Research Core Given Instructions
+
+## Login to your account on our Viz cluster (Enginframe)
+
+### EnginFrame
 
 NICE EnginFrame provides a 3d-accelerated remote desktop environment
 on an Nvidia GPU-equipped compute node. Coupled with the proprietary
@@ -7,7 +11,7 @@ supports the use of common visualization applications in a typical
 desktop environment using only a modern web browser.
 
 
-### Accessing EnginFrame
+#### Accessing EnginFrame
 
 Access to EnginFrame is granted on request. Request access by sending
 email to rc-help@colorado.edu.
@@ -29,7 +33,7 @@ app) to log in.
 ![EnginFrame login prompt](enginframe/login.png)
 
 
-### Remote desktop
+#### Remote desktop
 
 After logging in, select "Remote Desktop" from the list of services in
 the left sidebar. (Other custom services may be configured for you as
@@ -59,8 +63,24 @@ OpenGL applications.
 
 ![glxgears running via DCV](enginframe/glxgears.png)
 
+## Active Session
 
-### Additional Resources
+Once you have an active session, you'll be on a linux desktop that looks a lot like a Mac or Windows desktop. From the main menu, open a terminal. In the terminal, you can:
+
+```
+$ source /curc/sw/anaconda3/2019.03/bin/activate
+$ conda activate DLCGPU_VIZ
+```
+
+...from this conda environment, you can proceed using deeplabcut in "ipython" as you normally would, and you should be able to get the GUI for the labeling step.
+
+
+
+#### Additional Resources
 
 - [https://www.nice-software.com/products/enginframe](https://www.nice-software.com/products/enginframe)
 - [https://www.nice-software.com/products/dcv](https://www.nice-software.com/products/dcv)
+
+### Credit 
+* RC - CU Boulder
+* Andrew Monaghan
