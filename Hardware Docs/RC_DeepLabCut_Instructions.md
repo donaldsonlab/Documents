@@ -259,7 +259,7 @@ deeplabcut.analyzeskeleton(config, video, videotype='avi', shuffle=1, trainingse
 Spooky scary [source code](https://github.com/AlexEMG/DeepLabCut/blob/master/deeplabcut/post_processing/analyze_skeleton.py)
 
 ### [Optional] Active Learning --> Network Refinement
-##### Extract outlier frames from a video:
+#### Extract outlier frames from a video:
 For generalization to large data sets, images with insufficient labeling performance can be extracted, manually corrected by adjusting the labels to increase the training set and iteratively improve the feature detectors.
 NOTE: This step can be run itreatively
 ```
@@ -275,7 +275,7 @@ deeplabcut.extract_outlier_frames(config_path,[‘videofile_path’],outlieralgo
 ```
 To see other notes and parmaters click [here](https://github.com/AlexEMG/DeepLabCut/blob/master/docs/functionDetails.md#j-refinement-extract-outlier-frames)
 
-##### Refinement of the labels with our GUI:
+#### Refinement of the labels with our GUI:
 Four scenarios are possible:
 * Visible body part with accurate DeepLabCut prediction. These labels do not need any modifications.
 * Visible body part but wrong DeepLabCut prediction. Move the label’s location to the actual position of the body part.
@@ -298,7 +298,7 @@ Once done, go to [Merge](#merge-datasets)
 <img src=enginframe/dlcrefine.gif width="90%">
 </p>
 
-##### Merge datasets
+#### Merge datasets
 After correcting the labels for all the frames in each of the subdirectories, the users should merge the data set to create a new dataset. In this step the iteration parameter in the config.yaml file is automatically updated.
 To merge:
 ```
@@ -306,7 +306,7 @@ deeplabcut.merge_datasets(config_path)
 ```
 Details on merging can be found [here](https://github.com/AlexEMG/DeepLabCut/blob/master/docs/functionDetails.md#k-refine-labels-augmentation-of-the-training-dataset)
 
-##### Finished refining network
+#### Finished refining network
 After you are finished refining your network, you can repeat the process starting at [create_training_dataset](#create-training-dataset) 
 
 If after training the network generalizes well to the data, proceed to analyze new videos. Otherwise, consider labeling more data.
