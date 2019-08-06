@@ -35,7 +35,7 @@ app) to log in.
 </p>
 
 
-### Remote desktop
+## Create a Remote Desktop
 
 After logging in, select "Remote Desktop" from the list of services in
 the left sidebar. (Other custom services may be configured for you as
