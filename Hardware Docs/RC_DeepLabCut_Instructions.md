@@ -339,7 +339,7 @@ If after training the network generalizes well to the data, proceed to analyze n
 
 # Additional Resources
 
-## Research Core
+## Research Computing
 - [https://www.nice-software.com/products/enginframe](https://www.nice-software.com/products/enginframe)
 - [https://www.nice-software.com/products/dcv](https://www.nice-software.com/products/dcv)
 
