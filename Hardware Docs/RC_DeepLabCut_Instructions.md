@@ -195,6 +195,7 @@ Notes about evaluating the newly trained network can be found [here](https://git
 
 ### Video Analysis and Plotting Results:
 NOTE: **novel videos DO NOT need to be added to the config.yaml file**. You can simply have a folder elsewhere on your computer and pass the video folder (then it will analyze all videos of the specified type (i.e. ``videotype='.mp4'``), or pass the path to the **folder** or exact video(s) you wish to analyze:
+
 To analyze a **single** video:
 ```
 deeplabcut.analyze_videos(config_path,[‘fullpath/analysis/project/videos/reachingvideo1.avi’], save_as_csv=True)
