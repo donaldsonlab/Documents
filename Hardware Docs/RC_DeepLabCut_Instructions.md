@@ -312,14 +312,14 @@ After you are finished refining your network, you can repeat the process startin
 If after training the network generalizes well to the data, proceed to analyze new videos. Otherwise, consider labeling more data.
 
 
-### Additional Resources
+## Additional Resources
 
-#### Research Core
+### Research Core
 - [https://www.nice-software.com/products/enginframe](https://www.nice-software.com/products/enginframe)
 - [https://www.nice-software.com/products/dcv](https://www.nice-software.com/products/dcv)
 
-#### Deep Lab Cut (DLC)
-##### Help
+### Deep Lab Cut (DLC)
+#### Help
 In ipython/Jupyter notebook:
 ```
 deeplabcut.nameofthefunction?
@@ -329,12 +329,12 @@ In python or pythonw:
 help(deeplabcut.nameofthefunction)
 ```
 
-##### Tips for "daily" use:
+#### Tips for "daily" use:
 <p align="center"> 
 <img src= enginframe/daily.png format=1000w width="80%">
 </p>
 
-##### Exiting/Returning
+#### Exiting/Returning
 Linux/MacOS formatting example:
 ```
 source activate yourdeeplabcutEnvName
