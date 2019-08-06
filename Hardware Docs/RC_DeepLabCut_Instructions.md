@@ -94,50 +94,78 @@ config_path = deeplabcut.create_new_project(`Name of the project',`Name of the e
 Now is the time to edit the config.yaml file to your desire. See instructions on how and what [here](https://github.com/AlexEMG/DeepLabCut/blob/master/docs/functionDetails.md#b-configure-the-project)
 
 ### Label frames
-To label the frames we first have to extract them using 
-
+Extract frames from the given videos
 ```
 deeplabcut.extract_frames(config_path,‘automatic/manual’,‘uniform/kmeans’, userfeedback=False, crop=True/False)
 ```
-
-Then to label the frames using a GUI type
-
+Label the frames using a GUI
 ```
 deeplabcut.label_frames(config_path)
 ```
-
+Once your finished labeling, click Save, then Quit.
+NOTE: You can click Save at any point and then resume labeling later on using ```deeplabcut.label_frames(config_path)```
 **Demo:** using the GUI to label a video from DeepLabCut[http://www.mousemotorlab.org/deeplabcut]
 
 <p align="center">
 <img src=enginframe/dlcgui.gif "format=750w" width="70%">
 </p>
 
-Help for [extracting frames](https://github.com/AlexEMG/DeepLabCut/blob/master/docs/functionDetails.md#c-data-selection) or [labeling frames](https://github.com/AlexEMG/DeepLabCut/blob/master/docs/functionDetails.md#d-label-frames) 
-
+Go to [extracting frames](https://github.com/AlexEMG/DeepLabCut/blob/master/docs/functionDetails.md#c-data-selection) or [labeling frames](https://github.com/AlexEMG/DeepLabCut/blob/master/docs/functionDetails.md#d-label-frames) for help or to view parameters.
 
 ### Check Annotated Frames:
-
 ```
 deeplabcut.check_labels(config_path)
 ```
-
-more details [here](https://github.com/AlexEMG/DeepLabCut/blob/master/docs/functionDetails.md#e-check-annotated-frames)
+Checking labels returns a folder with labeled images. If the labels look good move on to [Create Training Dataset](#create-training-dataset). If the labels do not look correct, re-load the frames using ```deeplabcut.label_frames(config_path)```, move the labels around, and click save. 
+Help for [checking annotated frames](https://github.com/AlexEMG/DeepLabCut/blob/master/docs/functionDetails.md#e-check-annotated-frames)
 
 ### Create Training Dataset:
-
+***IMPORTANT:*** Only run this step where you are going to train the network.
+If you label on your laptop but move your project folder to Google Colab or AWS, lab server, etc, then run the step below on that platform! If you labeled on a Windows machine but train on Linux, this is fine as of 2.0.4! You simply will be asked if you want to convert the data, and it will be done automatically!
 ```
 deeplabcut.create_training_dataset(config_path,num_shuffles=1)
 ```
-
-more details [here](https://github.com/AlexEMG/DeepLabCut/blob/master/docs/functionDetails.md#f-create-training-dataset)
+For help and to view optional parameters click [here](https://github.com/AlexEMG/DeepLabCut/blob/master/docs/functionDetails.md#f-create-training-dataset)
 
 ### Train The Network:
+***IMPORTANT:*** The time required to train the network mainly depends on the frame size of the dataset and the computer hardware. On a NVIDIA GeForce GTX 1080 Ti GPU, it takes ≈ 6 hrs to train the network for at least 200,000 iterations. On the CPU, it will take several days to train for the same number of iterations on the same training dataset.
 
+***IMPORTANT:*** It is recommended to train for thousands of iterations until the loss plateaus (typically around 200,000). The variables display_iters and save_iters in the pose_cfg.yaml file allows the user to alter how often the loss is displayed and how often the weights are stored.
 ```
 deeplabcut.train_network(config_path,shuffle=1)
 ```
+or with more detail
+```
+deeplabcut.train_network(config_path,shuffle=1,trainingsetindex=0,gputouse=None,max_snapshots_to_keep=5,autotune=False,displayiters=100,saveiters=15000, maxiters=30000)
+```
+##### train_network() Parameters
+```
+config : string
+    Full path of the config.yaml file as a string.
 
-more details [here](https://github.com/AlexEMG/DeepLabCut/blob/master/docs/functionDetails.md#g-train-the-network)
+shuffle: int, optional
+    Integer value specifying the shuffle index to select for training. Default is set to 1
+
+trainingsetindex: int, optional
+    Integer specifying which TrainingsetFraction to use. By default the first (note that TrainingFraction is a list in config.yaml).
+
+gputouse: int, optional. Natural number indicating the number of your GPU (see number in nvidia-smi). If you do not have a GPU put None.
+See: https://nvidia.custhelp.com/app/answers/detail/a_id/3751/~/useful-nvidia-smi-queries
+
+max_snapshots_to_keep: int, or None. Sets how many snapshots are kept, i.e. states of the trained network. For every saving interation a snapshot is stored, however only the last max_snapshots_to_keep many are kept! If you change this to None, then all are kept.
+See: https://github.com/AlexEMG/DeepLabCut/issues/8#issuecomment-387404835
+
+autotune: property of TensorFlow, somehow faster if 'false' (as Eldar found out, see https://github.com/tensorflow/tensorflow/issues/13317). Default: False
+
+displayiters: this variable is actually set in pose_config.yaml. However, you can overwrite it with this hack. Don't use this regularly, just if you are too lazy to dig out
+the pose_config.yaml file for the corresponding project. If None, the value from there is used, otherwise it is overwritten! Default: None
+
+saveiters: this variable is actually set in pose_config.yaml. However, you can overwrite it with this hack. Don't use this regularly, just if you are too lazy to dig out
+the pose_config.yaml file for the corresponding project. If None, the value from there is used, otherwise it is overwritten! Default: None
+
+maxiters: This sets how many iterations to train. This variable is set in pose_config.yaml. However, you can overwrite it with this. If None, the value from there is used, otherwise it is overwritten! Default: None
+```
+Notes on [training a network](https://github.com/AlexEMG/DeepLabCut/blob/master/docs/functionDetails.md#g-train-the-network)
 
 ### Evaluate the Trained Network:
 
