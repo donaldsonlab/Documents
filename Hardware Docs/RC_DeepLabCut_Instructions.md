@@ -1,18 +1,15 @@
-# Deep Lab Cut
+# Using Deep Lab Cut on Research Computing Servers
 
-## Research Core Given Instructions
-### Login to your account on our Viz cluster (Enginframe)
+# Setup working environment on RC VIZ Servers
 
-### EnginFrame
-
+#### About EnginFrame
 NICE EnginFrame provides a 3d-accelerated remote desktop environment
 on an Nvidia GPU-equipped compute node. Coupled with the proprietary
 Desktop Cloud Visualization (DCV) VNC server, the EnginFrame service
 supports the use of common visualization applications in a typical
 desktop environment using only a modern web browser.
 
-
-#### Accessing EnginFrame
+## Login to your account on our Viz cluster (Enginframe)
 
 Access to EnginFrame is granted on request. Request access by sending
 email to rc-help@colorado.edu.
@@ -38,7 +35,7 @@ app) to log in.
 </p>
 
 
-#### Remote desktop
+### Remote desktop
 
 After logging in, select "Remote Desktop" from the list of services in
 the left sidebar. (Other custom services may be configured for you as
@@ -87,9 +84,9 @@ $ conda activate DLCGPU_VIZ
 
 ...from this conda environment, you can proceed using deeplabcut in "ipython" as you normally would, and you should be able to get the GUI for the labeling step. See [Creating a project](#creating-a-project) to get started.
 
-## DLC Instructions
+# Deep Lab Cut Instructions
 
-### Creating a project
+## Creating a Project
 Using the same terminal from [Active Session](#active-session), we are going to start an Ipython environment importing deeplabcut:
 ```
 ipython
@@ -102,10 +99,12 @@ NOTE: config_path is set as a variable to easily assign config.yaml
 config_path = deeplabcut.create_new_project(`Name of the project',`Name of the experimenter', [`Full path of video 1',`Full path of video2',`Full path of video3'], working_directory=`Full path of the working directory',copy_videos=True/False)
 ```
 
-### Configure the project
-Now is the time to edit the config.yaml file to your desire. See instructions on how and what [here](https://github.com/AlexEMG/DeepLabCut/blob/master/docs/functionDetails.md#b-configure-the-project)
+## Configure the Project
+Now is the time to edit the config.yaml file to your desire. 
 
-### Label frames
+(Instructions about how and what to edit can be found [here](https://github.com/AlexEMG/DeepLabCut/blob/master/docs/functionDetails.md#b-configure-the-project))
+
+## Label Frames
 Extract frames from the given videos
 ```
 deeplabcut.extract_frames(config_path,‘automatic/manual’,‘uniform/kmeans’, userfeedback=False, crop=True/False)
@@ -115,31 +114,39 @@ Label the frames using a GUI
 deeplabcut.label_frames(config_path)
 ```
 Once your finished labeling, click Save, then Quit.
-NOTE: You can click Save at any point and then resume labeling later on using ```deeplabcut.label_frames(config_path)```
-**Demo:** using the GUI to label a video from [Deep Lab Cut](http://www.mousemotorlab.org/deeplabcut)
 
+NOTE: You can click Save at any point and then resume labeling later on using ```deeplabcut.label_frames(config_path)```
+
+**Demo:** using the GUI to label a video from [Deep Lab Cut](http://www.mousemotorlab.org/deeplabcut)
 <p align="center">
 <img src=enginframe/dlcgui.gif "format=750w" width="70%">
 </p>
 
-Go to [extracting frames](https://github.com/AlexEMG/DeepLabCut/blob/master/docs/functionDetails.md#c-data-selection) or [labeling frames](https://github.com/AlexEMG/DeepLabCut/blob/master/docs/functionDetails.md#d-label-frames) for help or to view parameters.
+(For help, go to [extracting frames](https://github.com/AlexEMG/DeepLabCut/blob/master/docs/functionDetails.md#c-data-selection) or [labeling frames](https://github.com/AlexEMG/DeepLabCut/blob/master/docs/functionDetails.md#d-label-frames))
 
-### Check Annotated Frames:
+## Check Labeled Frames:
 ```
 deeplabcut.check_labels(config_path)
 ```
-Checking labels returns a folder with labeled images. If the labels look good move on to [Create Training Dataset](#create-training-dataset). If the labels do not look correct, re-load the frames using ```deeplabcut.label_frames(config_path)```, move the labels around, and click save. 
-Help for [checking annotated frames](https://github.com/AlexEMG/DeepLabCut/blob/master/docs/functionDetails.md#e-check-annotated-frames)
+Checking labels returns a folder with labeled images. If the labels look good move on to [Create Training Dataset](#create-training-dataset). 
 
-### Create Training Dataset:
+If the labels do not look correct, re-load the frames using ```deeplabcut.label_frames(config_path)```, move the labels around, and click save. 
+
+(Help on [checking annotated frames](https://github.com/AlexEMG/DeepLabCut/blob/master/docs/functionDetails.md#e-check-annotated-frames))
+
+## Create Training Dataset:
 ***IMPORTANT:*** Only run this step where you are going to train the network.
+
 If you label on your laptop but move your project folder to Google Colab or AWS, lab server, etc, then run the step below on that platform! If you labeled on a Windows machine but train on Linux, this is fine as of 2.0.4! You simply will be asked if you want to convert the data, and it will be done automatically!
+
+Create a training dataset:
 ```
 deeplabcut.create_training_dataset(config_path,num_shuffles=1)
 ```
-For help and to view optional parameters click [here](https://github.com/AlexEMG/DeepLabCut/blob/master/docs/functionDetails.md#f-create-training-dataset)
 
-### Train The Network:
+(For help and to view optional parameters click [here](https://github.com/AlexEMG/DeepLabCut/blob/master/docs/functionDetails.md#f-create-training-dataset))
+
+## Train the Network:
 ***IMPORTANT:*** The time required to train the network mainly depends on the frame size of the dataset and the computer hardware. On a NVIDIA GeForce GTX 1080 Ti GPU, it takes ≈ 6 hrs to train the network for at least 200,000 iterations. On the CPU, it will take several days to train for the same number of iterations on the same training dataset.
 
 ***IMPORTANT:*** It is recommended to train for thousands of iterations until the loss plateaus (typically around 200,000). The variables display_iters and save_iters in the pose_cfg.yaml file allows the user to alter how often the loss is displayed and how often the weights are stored.
@@ -154,7 +161,7 @@ Starts training the network for the dataset created for one specific shuffle wit
 deeplabcut.train_network(config_path,shuffle=1,trainingsetindex=0,gputouse=None,max_snapshots_to_keep=5,autotune=False,displayiters=100,saveiters=15000, maxiters=30000)
 ```
 
-##### train_network() Parameters
+#### train_network() Parameters
 ```
 config : string
     Full path of the config.yaml file as a string.
@@ -181,19 +188,24 @@ the pose_config.yaml file for the corresponding project. If None, the value from
 
 maxiters: This sets how many iterations to train. This variable is set in pose_config.yaml. However, you can overwrite it with this. If None, the value from there is used, otherwise it is overwritten! Default: None
 ```
-More notes on [training a network](https://github.com/AlexEMG/DeepLabCut/blob/master/docs/functionDetails.md#g-train-the-network)
 
-### Evaluate the Trained Network:
-Now that we have a trained network, it is important that we evaluate its preformance. If the generalization is not sufficient, you might want to:
+(More notes on [training a network](https://github.com/AlexEMG/DeepLabCut/blob/master/docs/functionDetails.md#g-train-the-network))
+
+## Evaluate the Trained Network:
+Now that we have a trained network, it is important that we evaluate its preformance. 
+
+If the generalization is not sufficient, you might want to:
 * check if the labels were imported correctly, i.e. invisible points are not labeled and the points of interest are labeled accurately
 * make sure that the loss has already converged
 * consider labeling additional images and make another iteration of the training data set
+
 ```
 deeplabcut.evaluate_network(config_path, Shuffles=[1], plotting=True)
 ```
-Notes about evaluating the newly trained network can be found [here](https://github.com/AlexEMG/DeepLabCut/blob/master/docs/functionDetails.md#h-evaluate-the-trained-network)
 
-### Video Analysis and Plotting Results:
+(Notes about evaluating the newly trained network can be found [here](https://github.com/AlexEMG/DeepLabCut/blob/master/docs/functionDetails.md#h-evaluate-the-trained-network))
+
+## Video Analysis and Plotting Results:
 NOTE: **novel videos DO NOT need to be added to the config.yaml file**. You can simply have a folder elsewhere on your computer and pass the video folder (then it will analyze all videos of the specified type (i.e. ``videotype='.mp4'``), or pass the path to the **folder** or exact video(s) you wish to analyze:
 
 To analyze a **single** video:
@@ -204,9 +216,9 @@ To analyze **multiple** videos:
 ```
 deeplabcut.analyze_videos(config_path,videos,videotype='avi',shuffle=1,trainingsetindex=0,gputouse=None,save_as_csv=False, destfolder=None)
 ```
-Here are some tips for scaling up your analysis using [batch analysis](https://github.com/AlexEMG/DeepLabCut/wiki/Batch-Processing-your-Analysis)
+(Here are some tips for scaling up your analysis using [batch analysis](https://github.com/AlexEMG/DeepLabCut/wiki/Batch-Processing-your-Analysis))
 
-#### Filter data:
+### Filter Data:
 You can also filter the predicted bodyparts by:
 ```
 deeplabcut.filterpredictions(config_path,[`/fullpath/project/videos/reachingvideo1.avi'], shuffle=1)
@@ -222,9 +234,11 @@ Here is an example of how this can be applied to a video:
 <img src= enginframe/filterdata.png format=1000w width="80%">
 </p>
 
-#### Create Labeled Videos:
+### Create Labeled Videos:
 Create labeled videos based on the extracted poses by plotting the labels on top of the frame and creating a video.
+
 NOTE: There are two modes to create videos: FAST and SLOW (but higher quality!).
+
 PRO TIP: The best quality videos are created when save_frames=True is passed. Therefore, when trailpoints and draw_skeleton are used, we highly recommend you also pass save_frames=True
 
 Create multiple high-quality labeled videos:
@@ -244,23 +258,26 @@ Example of a labeled skeleton video:
 <img src= enginframe/skele.gif format=1000w width="80%">
 </p>
 
-#### Plot the outputs:
+### Plot the Outputs:
 Using *matplotlib*, plots the trajectory of the extracted poses across the analyzed video.
 ```
 deeplabcut.plot_trajectories(config_path,[`/fullpath/project/videos/reachingvideo1.avi'],filtered=True)
 ```
-more details [here](https://github.com/AlexEMG/DeepLabCut/blob/master/docs/functionDetails.md#i-video-analysis-and-plotting-results)
 
-#### Analyze Skeleton Features:
+(more details [here](https://github.com/AlexEMG/DeepLabCut/blob/master/docs/functionDetails.md#i-video-analysis-and-plotting-results))
+
+### Analyze Skeleton Features:
 Extracts length and orientation of each "bone" of the skeleton as defined in the config.yaml file.
 ```
 deeplabcut.analyzeskeleton(config, video, videotype='avi', shuffle=1, trainingsetindex=0, save_as_csv=False, destfolder=None)
 ```
 Spooky scary [source code](https://github.com/AlexEMG/DeepLabCut/blob/master/deeplabcut/post_processing/analyze_skeleton.py)
 
-### [Optional] Active Learning --> Network Refinement
-#### Extract outlier frames from a video:
+## [Optional] Active Learning --> Network Refinement
+**Complete these steps if the network was not trained properly or was not trained to your liking.**
+### Extract Outlier Frames from a Video:
 For generalization to large data sets, images with insufficient labeling performance can be extracted, manually corrected by adjusting the labels to increase the training set and iteratively improve the feature detectors.
+
 NOTE: This step can be run itreatively
 ```
 deeplabcut.extract_outlier_frames(config_path,[`videofile_path'])
@@ -270,12 +287,14 @@ Frame selection methods: outlieralgorithm= 'fitting', 'jump', 'uncertain', or 'm
 * *jump:* select frames where a particular body part or all body parts jumped more than \uf pixels from the last frame.
 * *fitting:* select frames if the predicted body part location deviates from a state-space model fit to the time series of individual body parts. Specifically, this method fits an Auto Regressive Integrated Moving Average (ARIMA) model to the time series for each body part. Thereby each body part detection with a likelihood smaller than pbound is treated as missing data. Putative outlier frames are then identified as time points, where the average body part estimates are at least \uf pixel away from the fits. The parameters of this method are \uf, pbound, the ARIMA parameters as well as the list of body parts to average over (can also be all).
 * *manual:* manually select outlier frames based on visual inspection from the user.
+
 ```
 deeplabcut.extract_outlier_frames(config_path,[‘videofile_path’],outlieralgorithm='manual')
 ```
-To see other notes and parmaters click [here](https://github.com/AlexEMG/DeepLabCut/blob/master/docs/functionDetails.md#j-refinement-extract-outlier-frames)
 
-#### Refinement of the labels with our GUI:
+(To see other notes and parmaters click [here](https://github.com/AlexEMG/DeepLabCut/blob/master/docs/functionDetails.md#j-refinement-extract-outlier-frames))
+
+### Refinement of the Labels with our GUI:
 Four scenarios are possible:
 * Visible body part with accurate DeepLabCut prediction. These labels do not need any modifications.
 * Visible body part but wrong DeepLabCut prediction. Move the label’s location to the actual position of the body part.
@@ -287,9 +306,13 @@ The labels for extracted putative outlier frames can be refined by opening the G
 deeplabcut.refine_labels(config_path)
 ```
 Use the ‘Load Labels’ button to select one of the subdirectories, where the extracted frames are stored. 
+
 For better chances to identify the low-confidence labels, specify the threshold of the likelihood.
+
 Next, to adjust the position of the label, hover the mouse over the labels to identify the specific body part, left click and drag it to a different location. 
+
 To delete a specific label, right click on the label (once a label is deleted, it cannot be retrieved).
+
 Once done, go to [Merge](#merge-datasets)
 
 **mini-demo:** using the refinement GUI, a user can load the file then zoom, pan, and edit and/or remove points:
@@ -298,15 +321,17 @@ Once done, go to [Merge](#merge-datasets)
 <img src=enginframe/dlcrefine.gif width="90%">
 </p>
 
-#### Merge datasets
+### Merge Datasets
 After correcting the labels for all the frames in each of the subdirectories, the users should merge the data set to create a new dataset. In this step the iteration parameter in the config.yaml file is automatically updated.
+
 To merge:
 ```
 deeplabcut.merge_datasets(config_path)
 ```
-Details on merging can be found [here](https://github.com/AlexEMG/DeepLabCut/blob/master/docs/functionDetails.md#k-refine-labels-augmentation-of-the-training-dataset)
 
-#### Finished refining network
+(Details on merging can be found [here](https://github.com/AlexEMG/DeepLabCut/blob/master/docs/functionDetails.md#k-refine-labels-augmentation-of-the-training-dataset))
+
+### Finished Refining Network
 After you are finished refining your network, you can repeat the process starting at [create_training_dataset](#create-training-dataset) 
 
 If after training the network generalizes well to the data, proceed to analyze new videos. Otherwise, consider labeling more data.
