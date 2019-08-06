@@ -1,6 +1,7 @@
-# Deep Lab Cut - Research Core Given Instructions
+# Deep Lab Cut
 
-## Login to your account on our Viz cluster (Enginframe)
+## Research Core Given Instructions
+### Login to your account on our Viz cluster (Enginframe)
 
 ### EnginFrame
 
@@ -72,7 +73,13 @@ $ source /curc/sw/anaconda3/2019.03/bin/activate
 $ conda activate DLCGPU_VIZ
 ```
 
-...from this conda environment, you can proceed using deeplabcut in "ipython" as you normally would, and you should be able to get the GUI for the labeling step.
+...from this conda environment, you can proceed using deeplabcut in "ipython" as you normally would, and you should be able to get the GUI for the labeling step. See [Creating a project] to get started(#creating-a-project)
+
+## DLC Instructions
+
+### Creating a project
+
+
 
 
 
