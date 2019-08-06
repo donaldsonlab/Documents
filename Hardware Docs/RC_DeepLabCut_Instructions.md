@@ -241,7 +241,7 @@ deeplabcut.create_labeled_video(config_path,[‘fullpath/afolderofvideos’], vi
 ```
 Example of a labeled skeleton video:
 <p align="center"> 
-<img src= enginframe/skele.png format=1000w width="80%">
+<img src= enginframe/skele.gif format=1000w width="80%">
 </p>
 
 #### Plot the outputs:
