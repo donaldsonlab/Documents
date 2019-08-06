@@ -206,13 +206,52 @@ Now, create a new training set and re-train (same steps as above)!
 more details [here](https://github.com/AlexEMG/DeepLabCut/blob/master/docs/functionDetails.md#k-refine-labels-augmentation-of-the-training-dataset)
 
 
-
-
 ### Additional Resources
 
+#### Research Core
 - [https://www.nice-software.com/products/enginframe](https://www.nice-software.com/products/enginframe)
 - [https://www.nice-software.com/products/dcv](https://www.nice-software.com/products/dcv)
+
+#### Deep Lab Cut (DLC)
+##### Help
+In ipython/Jupyter notebook:
+
+```
+deeplabcut.nameofthefunction?
+```
+
+In python or pythonw:
+
+```
+help(deeplabcut.nameofthefunction)
+```
+
+##### Tips for "daily" use:
+
+<p align="center"> 
+<img src= enginframe/daily.png format=1000w width="80%">
+</p>
+
+##### Exiting/Returning
+
+Linux/MacOS formatting example:
+```
+source activate yourdeeplabcutEnvName
+ipython
+import deeplabcut
+config_path ='/home/yourprojectfolder/config.yaml'
+```
+Windows formatting example:
+```
+activate yourdeeplabcutEnvName
+ipython
+import deeplabcut
+config_path = r'C:\home\yourprojectfolder\config.yaml'
+```
+
 
 ### Credit 
 * RC - CU Boulder
 * Andrew Monaghan
+* [Mathis et al, 2018](https://www.nature.com/articles/s41593-018-0209-y)
+* [Nath, Mathis et al, 2019](https://doi.org/10.1038/s41596-019-0176-0)
