@@ -2,13 +2,6 @@
 
 # Setup working environment on RC VIZ Servers
 
-#### About EnginFrame
-NICE EnginFrame provides a 3d-accelerated remote desktop environment
-on an Nvidia GPU-equipped compute node. Coupled with the proprietary
-Desktop Cloud Visualization (DCV) VNC server, the EnginFrame service
-supports the use of common visualization applications in a typical
-desktop environment using only a modern web browser.
-
 ## Login to your account on our Viz cluster (Enginframe)
 
 Access to EnginFrame is granted on request. Request access by sending
@@ -93,27 +86,37 @@ ipython
 import deeplabcut
 ```
 Next, to create a new project use the following:
-NOTE: Some parameters are not used or are optional when calling create_new_project
-NOTE: config_path is set as a variable to easily assign config.yaml
 ```
 config_path = deeplabcut.create_new_project(`Name of the project',`Name of the experimenter', [`Full path of video 1',`Full path of video2',`Full path of video3'], working_directory=`Full path of the working directory',copy_videos=True/False)
 ```
 
+NOTE: Some parameters are not used or are optional when calling create_new_project
+
+NOTE: config_path is set as a variable to easily assign config.yaml
+
+
 ## Configure the Project
-Now is the time to edit the config.yaml file to your desire. 
+Now is the time to edit the config.yaml file to adjust the settings
+```
+quit
+vim fullpath/project/config.yaml
+*edit the settings*
+ipython
+import deeplabcut
+```
 
 (Instructions about how and what to edit can be found [here](https://github.com/AlexEMG/DeepLabCut/blob/master/docs/functionDetails.md#b-configure-the-project))
 
 ## Label Frames
-Extract frames from the given videos
+First, extract frames from the given videos:
 ```
 deeplabcut.extract_frames(config_path,‘automatic/manual’,‘uniform/kmeans’, userfeedback=False, crop=True/False)
 ```
-Label the frames using a GUI
+Second, label the frames using a GUI:
 ```
 deeplabcut.label_frames(config_path)
 ```
-Once your finished labeling, click Save, then Quit.
+Click **Save**, then **Quit**.
 
 NOTE: You can click Save at any point and then resume labeling later on using ```deeplabcut.label_frames(config_path)```
 
@@ -161,43 +164,10 @@ Starts training the network for the dataset created for one specific shuffle wit
 deeplabcut.train_network(config_path,shuffle=1,trainingsetindex=0,gputouse=None,max_snapshots_to_keep=5,autotune=False,displayiters=100,saveiters=15000, maxiters=30000)
 ```
 
-#### train_network() Parameters
-```
-config : string
-    Full path of the config.yaml file as a string.
-
-shuffle: int, optional
-    Integer value specifying the shuffle index to select for training. Default is set to 1
-
-trainingsetindex: int, optional
-    Integer specifying which TrainingsetFraction to use. By default the first (note that TrainingFraction is a list in config.yaml).
-
-gputouse: int, optional. Natural number indicating the number of your GPU (see number in nvidia-smi). If you do not have a GPU put None.
-See: https://nvidia.custhelp.com/app/answers/detail/a_id/3751/~/useful-nvidia-smi-queries
-
-max_snapshots_to_keep: int, or None. Sets how many snapshots are kept, i.e. states of the trained network. For every saving interation a snapshot is stored, however only the last max_snapshots_to_keep many are kept! If you change this to None, then all are kept.
-See: https://github.com/AlexEMG/DeepLabCut/issues/8#issuecomment-387404835
-
-autotune: property of TensorFlow, somehow faster if 'false' (as Eldar found out, see https://github.com/tensorflow/tensorflow/issues/13317). Default: False
-
-displayiters: this variable is actually set in pose_config.yaml. However, you can overwrite it with this hack. Don't use this regularly, just if you are too lazy to dig out
-the pose_config.yaml file for the corresponding project. If None, the value from there is used, otherwise it is overwritten! Default: None
-
-saveiters: this variable is actually set in pose_config.yaml. However, you can overwrite it with this hack. Don't use this regularly, just if you are too lazy to dig out
-the pose_config.yaml file for the corresponding project. If None, the value from there is used, otherwise it is overwritten! Default: None
-
-maxiters: This sets how many iterations to train. This variable is set in pose_config.yaml. However, you can overwrite it with this. If None, the value from there is used, otherwise it is overwritten! Default: None
-```
-
 (More notes on [training a network](https://github.com/AlexEMG/DeepLabCut/blob/master/docs/functionDetails.md#g-train-the-network))
 
 ## Evaluate the Trained Network:
 Now that we have a trained network, it is important that we evaluate its preformance. 
-
-If the generalization is not sufficient, you might want to:
-* check if the labels were imported correctly, i.e. invisible points are not labeled and the points of interest are labeled accurately
-* make sure that the loss has already converged
-* consider labeling additional images and make another iteration of the training data set
 
 ```
 deeplabcut.evaluate_network(config_path, Shuffles=[1], plotting=True)
@@ -338,6 +308,13 @@ If after training the network generalizes well to the data, proceed to analyze n
 
 
 # Additional Resources
+
+## About EnginFrame
+NICE EnginFrame provides a 3d-accelerated remote desktop environment
+on an Nvidia GPU-equipped compute node. Coupled with the proprietary
+Desktop Cloud Visualization (DCV) VNC server, the EnginFrame service
+supports the use of common visualization applications in a typical
+desktop environment using only a modern web browser.
 
 ## Research Computing
 - [https://www.nice-software.com/products/enginframe](https://www.nice-software.com/products/enginframe)
