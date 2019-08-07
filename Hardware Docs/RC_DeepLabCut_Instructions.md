@@ -377,6 +377,7 @@ config_path = r'C:\home\yourprojectfolder\config.yaml'
 
 
 # Credit 
+* [Chase Dudas](https://github.com/ChaseD13) - Developer 
 * RC - CU Boulder
 * Andrew Monaghan
 * [Mathis et al, 2018](https://www.nature.com/articles/s41593-018-0209-y)
