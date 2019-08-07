@@ -176,6 +176,7 @@ deeplabcut.evaluate_network(config_path, Shuffles=[1], plotting=True)
 (Notes about evaluating the newly trained network can be found [here](https://github.com/AlexEMG/DeepLabCut/blob/master/docs/functionDetails.md#h-evaluate-the-trained-network))
 
 ## Video Analysis and Plotting Results:
+### 1. Analyze Data
 NOTE: **novel videos DO NOT need to be added to the config.yaml file**. You can simply have a folder elsewhere on your computer and pass the video folder (then it will analyze all videos of the specified type (i.e. ``videotype='.mp4'``), or pass the path to the **folder** or exact video(s) you wish to analyze:
 
 To analyze a **single** video:
@@ -188,7 +189,7 @@ deeplabcut.analyze_videos(config_path,videos,videotype='avi',shuffle=1,trainings
 ```
 (Here are some tips for scaling up your analysis using [batch analysis](https://github.com/AlexEMG/DeepLabCut/wiki/Batch-Processing-your-Analysis))
 
-### Filter Data:
+### 2. Filter Data
 You can also filter the predicted bodyparts by:
 ```
 deeplabcut.filterpredictions(config_path,[`/fullpath/project/videos/reachingvideo1.avi'], shuffle=1)
@@ -204,7 +205,7 @@ Here is an example of how this can be applied to a video:
 <img src= enginframe/filterdata.png format=1000w width="80%">
 </p>
 
-### Create Labeled Videos:
+### 3. Create Labeled Videos
 Create labeled videos based on the extracted poses by plotting the labels on top of the frame and creating a video.
 
 NOTE: There are two modes to create videos: FAST and SLOW (but higher quality!).
@@ -228,7 +229,7 @@ Example of a labeled skeleton video:
 <img src= enginframe/skele.gif format=1000w width="80%">
 </p>
 
-### Plot the Outputs:
+### 4. Plot the Outputs
 Using *matplotlib*, plots the trajectory of the extracted poses across the analyzed video.
 ```
 deeplabcut.plot_trajectories(config_path,[`/fullpath/project/videos/reachingvideo1.avi'],filtered=True)
@@ -236,7 +237,7 @@ deeplabcut.plot_trajectories(config_path,[`/fullpath/project/videos/reachingvide
 
 (more details [here](https://github.com/AlexEMG/DeepLabCut/blob/master/docs/functionDetails.md#i-video-analysis-and-plotting-results))
 
-### Analyze Skeleton Features:
+### 5. Analyze Skeleton Features
 Extracts length and orientation of each "bone" of the skeleton as defined in the config.yaml file.
 ```
 deeplabcut.analyzeskeleton(config, video, videotype='avi', shuffle=1, trainingsetindex=0, save_as_csv=False, destfolder=None)
