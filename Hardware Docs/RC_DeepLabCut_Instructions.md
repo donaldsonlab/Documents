@@ -220,7 +220,7 @@ Optionally, if you want to use the filtered data for a video or directory of fil
 ```
  deeplabcut.create_labeled_video(config_path,[‘fullpath/afolderofvideos’], videotype='.mp4', filtered=True)
 ```
-You can also optionally add a skeleton to connect points and/or add a history of points for visualization. 
+You can also optionally add a skeleton to connect points and/or add a history of points for visualization: 
 ```
 deeplabcut.create_labeled_video(config_path,[‘fullpath/afolderofvideos’], videotype='.mp4', draw_skeleton=True)
 ```
