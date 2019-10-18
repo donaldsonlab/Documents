@@ -12,6 +12,7 @@
 ###########################################################
 # PARAMETERS
 ###########################################################
+
 import cv2 
 import numpy as np 
 from tkinter import *
@@ -20,6 +21,8 @@ import skvideo.io
 import os
 import platform
 import time
+import pims #lazy loading of videos http://soft-matter.github.io/pims/v0.4.1/
+#import av
 
 ###########################################################
 # CLASSES
@@ -85,15 +88,15 @@ counterQ3 = 0
 counterQ4 = 0
 
 # Video path directs which input video should be used
-VIDEO_PATH = r'd:\Donaldson Lab\Current Work\Video Split Gui\fourQuad.flv'
+VIDEO_PATH = r'd:\Donaldson Lab\Current Work\Video Split Gui\fourQuad.avi'
 # Shared video path directs where the out put video(s) should be saved
 SAVED_VIDEO_PATH = r'd:\Donaldson Lab\Current Work\Video Split Gui\voleChopper_'
 # Date the video was created(Windows) or modified(Linux/OSx). Found in the properties of a file.
 DATE_OF_VIDEO = ""
 # split the video vertically
-WIDTH = 480
+WIDTH = 640
 # split the video horizontally
-HEIGHT = 640
+HEIGHT = 480
 
 # Try to get the date that a file was created, falling back to when it was
 # last modified if that isn't possible.
@@ -134,6 +137,10 @@ def popupmsg(title, msg):
     popup.mainloop()
 
 
+# Dynamically creates a new vole entry in the Q1 frame
+#   Appends a new voleEntry object to voleArrayQ1
+#   Variables are assigned to the voleEntry's properties.
+#   Incriments the counter for Q1
 def addVoleQ1():
     #This segment would eb used if the class doesnt work out 
     # WORKS!
@@ -170,6 +177,10 @@ def addVoleQ1():
     counterQ1 += 1
 
 
+# Dynamically creates a new vole entry in the Q2 frame
+#   Appends a new voleEntry object to voleArrayQ2
+#   Variables are assigned to the voleEntry's properties.
+#   Incriments the counter for Q2
 def addVoleQ2():
     # Stores a new voleEntry object into the vole array for Q2. 
     # Default values:
@@ -193,6 +204,10 @@ def addVoleQ2():
     counterQ2 += 1
 
 
+# Dynamically creates a new vole entry in the Q3 frame
+#   Appends a new voleEntry object to voleArrayQ3
+#   Variables are assigned to the voleEntry's properties.
+#   Incriments the counter for Q3
 def addVoleQ3():
     # Stores a new voleEntry object into the vole array for Q3. 
     # Default values:
@@ -216,6 +231,10 @@ def addVoleQ3():
     counterQ3 += 1
 
 
+# Dynamically creates a new vole entry in the Q4 frame
+#   Appends a new voleEntry object to voleArrayQ4
+#   Variables are assigned to the voleEntry's properties.
+#   Incriments the counter for Q4
 def addVoleQ4():
     # Stores a new voleEntry object into the vole array for Q4. 
     # Default values:
@@ -239,6 +258,11 @@ def addVoleQ4():
     counterQ4 += 1
 
 
+# Function called when the user hits the "Done" button in any of the quadrants
+#    Function takes in a string which represnts the quadrant number of the pressed "Done" button
+#    If elif logic checks which quadrant was pressed
+#    For each quadrant, the info for each entry in the voleArrayQ(N) is printed to console
+#    Then the function saveVideosUsingFrames is called and passed the quadrant number and the respective voleArray for that quadrant
 def batchProcess(quadNumber):
     print("Printing all objects in %s:" % quadNumber)
 
@@ -250,21 +274,21 @@ def batchProcess(quadNumber):
         print("Batch processing for Q1...")
         saveVideosUsingFrames("Q1",voleArrayQ1)
 
-    if quadNumber == "Q2":
+    elif quadNumber == "Q2":
         for i in range(counterQ2):
             # Used to access class variables
             voleArrayQ2[i].getInfo()
         print("Batch processing for Q2...")
         saveVideosUsingFrames("Q2",voleArrayQ2)
 
-    if quadNumber == "Q3":
+    elif quadNumber == "Q3":
         for i in range(counterQ3):
             # Used to access class variables
             voleArrayQ3[i].getInfo()
         print("Batch processing for Q3...")
         saveVideosUsingFrames("Q3",voleArrayQ3)
 
-    if quadNumber == "Q4":
+    elif quadNumber == "Q4":
         for i in range(counterQ4):
             # Used to access class variables
             voleArrayQ4[i].getInfo()
@@ -272,20 +296,24 @@ def batchProcess(quadNumber):
         saveVideosUsingFrames("Q4",voleArrayQ4)
 
 
+# Imports the selected video using OpenCV
+#   global definitions are used to set the video capture, cap, and the frames per second, fps.
 def importVideo():
     global cap 
     global fps
 
-    cap = cv2.VideoCapture(VIDEO_PATH)
+    # No longer uses numpy slicing to access frames
+    # Grab a frame: vid.get_frame(0) = frame 0
+    cap = pims.open(VIDEO_PATH) 
 
-    fps = cap.get(cv2.CAP_PROP_FPS)
+    # Grabs the video's FPS
+    fps = int(cap.frame_rate)
 
-
-def closeVideo():
-    cap.release()
-    out.release()
-
-
+# Converts timestamps to frame numbers
+#   Regex checks for timestamps in the form of "00:00" or "00:00:00"
+#   Depending which format is used, the timestamp is converted into total seconds
+#   The frame number is found by multiplying seconds by frames per second
+#   Returns the frame number as an int
 def timeToFrame(timeStamp, fps):
     timestampRegexHours = r'[0-9]{2}:[0-9]{2}:[0-9]{2}'
     timestampRegexMinutes = r'[0-9]{2}:[0-9]{2}'
@@ -313,11 +341,16 @@ def timeToFrame(timeStamp, fps):
     return int(frameFromTime)
     
 
+# Saves videos out to disk
+#   Takes in a string quadrantNumber and a list of voleEntry objects voleEntryList
+#   Loops for every entry in voleEntryList
+#   Using timeToFrame, the current frame position flag is set equal to the starting timestamp
+#   ...
 def saveVideosUsingFrames(quadrantNumber, voleEntryList):
     
     # Loop through each vole entry in the list for quadrant 1
     for voleEntry in voleEntryList:
-
+        # Convert timestamps to frames
         startingFrame = timeToFrame(voleEntry.getStartTime(),fps)
         print("Starting frame @: %s" % startingFrame)
         endingFrame = timeToFrame(voleEntry.getEndTime(),fps)
@@ -326,69 +359,69 @@ def saveVideosUsingFrames(quadrantNumber, voleEntryList):
         # Used to hold the number of frames needed to be captured.
         frameCount = endingFrame - startingFrame
 
-        # Capture the width and height of the default video
-        frameWidth = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
-        frameHeight = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
-
-        # Create an an array with frameCount empty frames
-        selectedFramesFromVideo = np.empty((frameCount, frameHeight, frameWidth, 3), np.dtype('uint8'))
-        # Holds new frames from ROI selection
-        finalOutputVideo = []
-        # Used as a counter to get the desired frames
-        fc = 0
-        ret = True
-
-        # 0-based index of the frame to be decoded/captured next.
-        cap.set(cv2.CAP_PROP_POS_FRAMES, startingFrame); 
-        print('Position:', int(cap.get(cv2.CAP_PROP_POS_FRAMES)))
-
-        # Loop to capture and store frameCount frames into selectedFramesFromVideo. 
-        while fc < frameCount and ret:
-            ret, selectedFramesFromVideo[fc] = cap.read()
-            fc += 1
-
-        # Crop the video based on the quadrant number.
+        # Allow user to select a region of intrest
         if quadrantNumber == "Q1":
             # Q1: Bottom Right Video Quadrant
-            selectedFramesFromVideo = selectedFramesFromVideo[:, WIDTH:(2*WIDTH), HEIGHT:(2*HEIGHT), :]
+            img = cap.get_frame(int((startingFrame + endingFrame) / 2))[HEIGHT:(2*HEIGHT), WIDTH:(2*WIDTH)]
 
         elif quadrantNumber == "Q2":
             # Q2: Bottom Left Video Quadrant
-            selectedFramesFromVideo = selectedFramesFromVideo[:, WIDTH:(2*WIDTH), 87:HEIGHT, :]
+            img = cap.get_frame(int((startingFrame + endingFrame) / 2))[HEIGHT:(2*HEIGHT), :WIDTH]
 
         elif quadrantNumber == "Q3":
             # Q3: Top Left Video Quadrant
-            selectedFramesFromVideo = selectedFramesFromVideo[:, :WIDTH, 87:HEIGHT, :]
+            img = cap.get_frame(int((startingFrame + endingFrame) / 2))[:HEIGHT, :WIDTH]
 
         elif quadrantNumber == "Q4":
             # Q4: Top Right Video Quadrant
-            selectedFramesFromVideo = selectedFramesFromVideo[:, :WIDTH, HEIGHT:(2*HEIGHT), :]
-
-        # Image to display to select the ROI from
-        img = selectedFramesFromVideo[int(frameCount / 2)]
-        # Prompts window to select ROI using a rectangular selection tool
+            img = cap.get_frame(int((startingFrame + endingFrame) / 2))[:HEIGHT, WIDTH:(2*WIDTH)]
+        
         r = cv2.selectROI("crop",img)
-        # Check if the user slected a ROI
-        if r != (0, 0, 0, 0):
-            #If yes, loop through each frame in selectedFramesFromVideo and crop each frame using the ROI. Append the cropped frames to finalOutputVideo.
-            for frame in selectedFramesFromVideo:
-                # Crop image using ROI dimensions
-                finalOutputVideo.append(frame[int(r[1]):int(r[1]+r[3]), int(r[0]):int(r[0]+r[2])])
-            cv2.destroyWindow("crop")
         cv2.destroyWindow("crop")
 
-        # Append MetaData to the filename that will be written out. Specified as Date, Timestamp, Vole Number.
+        # Append MetaData to the filename that will be written out. Specified as Date(MM-DD-YYYY), Timestamp(HH-MM-SS), Vole Number(#).
         splitDateAttributes = DATE_OF_VIDEO.split()
-        saveVideoPathPlusMetadata = SAVED_VIDEO_PATH + ("%s-%s-%s_%s_Vole#%s.mp4" % (splitDateAttributes[4], splitDateAttributes[1], splitDateAttributes[2], 
+        saveVideoPathPlusMetadata = SAVED_VIDEO_PATH + ("%s-%s-%s_%s_%s.mp4" % (splitDateAttributes[1], splitDateAttributes[2], splitDateAttributes[4],  
                                                                                         splitDateAttributes[3].replace(':', "-"), voleEntry.getVoleNumber()))
+        # OpenCV Video writer
+        fourcc = cv2.VideoWriter_fourcc(*'mp4v') #encoder to use
+        writer= cv2.VideoWriter(saveVideoPathPlusMetadata, fourcc, fps, ( int(r[2]), int(r[3]) ))
 
-        # Logic to check if user selected an arena. If not then set final array equal to the original quadrant array
-        if not finalOutputVideo:
-            # Write that back out as a new video
-            skvideo.io.vwrite(saveVideoPathPlusMetadata, selectedFramesFromVideo)
-        else:
-            # Write that back out as a new video
-            skvideo.io.vwrite(saveVideoPathPlusMetadata, finalOutputVideo)
+        # Used as a counter to get the desired frames
+        fc = startingFrame
+
+        # Loop over each desired frame
+        while fc < endingFrame:
+            # Grab frame #fc from the ImageSequence cap
+            originalFrame = cap.get_frame(fc)
+
+            # Crop the video based on the quadrant number.
+            if quadrantNumber == "Q1":
+                # Q1: Bottom Right Video Quadrant
+                originalFrame = originalFrame[HEIGHT:(2*HEIGHT), WIDTH:(2*WIDTH)]
+
+            elif quadrantNumber == "Q2":
+                # Q2: Bottom Left Video Quadrant
+                originalFrame = originalFrame[HEIGHT:(2*HEIGHT), :WIDTH]
+
+            elif quadrantNumber == "Q3":
+                # Q3: Top Left Video Quadrant
+                originalFrame = originalFrame[:HEIGHT, :WIDTH]
+
+            elif quadrantNumber == "Q4":
+                # Q4: Top Right Video Quadrant
+                originalFrame = originalFrame[:HEIGHT, WIDTH:(2*WIDTH)]
+
+            if r != (0, 0, 0, 0):
+                # Crop image
+                originalFrame = originalFrame[int(r[1]):int(r[1]+r[3]), int(r[0]):int(r[0]+r[2])]
+
+            writer.write(originalFrame)
+
+            #Incriment
+            fc += 1
+
+        writer.release()
 
 ###########################################################
 # END OF FUNCTION DEF
@@ -407,10 +440,10 @@ print("Got: %s\n" % timeToFrame("01:30", 60))
 #Tests for importVideo
 print("Testing importVideo()...")
 importVideo()
-if cap.isOpened():
-    print("Video import succeeded")
-else:
-    print("Video import failed")
+# if cap.isOpened():
+#     print("Video import succeeded")
+# else:
+#     print("Video import failed")
 print("FPS set to: %s\n" % fps)
 
 ###########################################################
@@ -458,6 +491,8 @@ quad3.pack(side = LEFT)
 quad4.pack(side = LEFT)
 
 mainloop() 
+
+cap.close()
 
 ###########################################################
 # END OF MAIN
