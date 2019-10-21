@@ -23,8 +23,8 @@ import os
 import platform
 import time
 import pims #lazy loading of videos http://soft-matter.github.io/pims/v0.4.1/
-import multiprocessing
 import queue
+
 ###########################################################
 # CLASSES
 ###########################################################
@@ -204,8 +204,15 @@ def saveVideosUsingFrames(quadrantNumber, voleEntryList, fps, cap, HEIGHT, WIDTH
         print("Ending frame @: %s" % endingFrame)
         print("FPS @: %s" % fps)
 
+        # Used as a counter to get the desired frames
+        fc = startingFrame
+
         # Used to hold the number of frames needed to be captured.
         frameCount = endingFrame - startingFrame
+
+        # Reset progress bar progression
+        progressBar['value'] = 0 
+        master.update()
 
         # Allow user to select a region of intrest
         if quadrantNumber == "Q1":
@@ -248,9 +255,6 @@ def saveVideosUsingFrames(quadrantNumber, voleEntryList, fps, cap, HEIGHT, WIDTH
             # OpenCV Video Writer with dimensions for regular quadrant
             writer= cv2.VideoWriter(saveVideoPathPlusMetadata, fourcc, fps, ( WIDTH, HEIGHT ))
 
-        # Used as a counter to get the desired frames
-        fc = startingFrame
-
         # Loop over each desired frame
         while fc < endingFrame:
             # Grab frame #fc from the ImageSequence cap
@@ -285,14 +289,13 @@ def saveVideosUsingFrames(quadrantNumber, voleEntryList, fps, cap, HEIGHT, WIDTH
             fc += 1
 
             # Increment progress bar 
-            progressBar['value'] = (fc / frameCount) * 100
-            master.update_idletasks()
+            progressBar['value'] = ((fc - startingFrame) / frameCount) * 100
+            master.update()
 
             
         # Release the writer for each entry. This ensure the video is not corrupt after execution. 
         writer.release()
     
-
 
 ###########################################################
 # END OF FUNCTION DEF
