@@ -1,14 +1,14 @@
 ###########################################################
 # AUTHOR  : Chase Dudas
 # CREATED : 10/9/2019
-# Title   : videoParser.py
+# Title   : videoChopper.py
 # COMMENT : A GUI used to edit and crop a video. For lab 
 #           purposes, the video had 4 simultaneous 
 #           experiments in a square-like pattern. The 
 #           GUI is hard coded for this case, but it can 
 #           easily be adjusted by editing how the video 
 #           is cropped in the import video function. 
-# Need    : Python, OpenCV, Tkinter
+# Need    : Python, OpenCV, Tkinter, PIMS
 ###########################################################
 # PARAMETERS
 ###########################################################
@@ -18,7 +18,6 @@ import numpy as np
 from tkinter import *
 from tkinter.ttk import Progressbar
 import re
-import skvideo.io
 import os
 import platform
 import time
