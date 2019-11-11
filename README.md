@@ -9,7 +9,6 @@ A repo to house various documents used by the lab.
 
 * Scripts
   * Anaconda Environments
-    * 
 
 * VoleOperantQuadrantSplitter
   * voleChopper_OLD.py
