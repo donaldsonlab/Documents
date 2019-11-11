@@ -9,13 +9,17 @@ A repo to house various documents used by the lab.
 
 * Scripts
   * Anaconda Environments
+    * voleChopperEnvironment.yml
+      * Environment used for scripts located in VoleOperantQuadrantSplitter
 
 * VoleOperantQuadrantSplitter
   * voleChopper_OLD.py
 
   * voleChopper_v1.py
-
+    * uses function call to get frames
   * voleChopper_v2.py
+    * uses numpy slicing
+    * *current working version*
 
 ### Hardware Docs
 * enginframe
