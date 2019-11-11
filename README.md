@@ -1,4 +1,4 @@
-# Documents
+# Lab Documents
 A repo to house various documents used by the lab.
 
 ## Folders
