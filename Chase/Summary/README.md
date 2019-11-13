@@ -5,7 +5,8 @@ This is a summary of the work I have completed for the Donaldson Lab.
 1. [ UI Lab Capture ](#capt)
 2. [ Automating Behavioral Scoring using Deep Lab Cut ](#dlc)
 3. [ Vole Operant Quadrant Splitter ](#voqs)
-4. [Vole Surgery Registry ](#vreg)
+4. [ Vole Surgery Registry ](#vreg)
+5. [ Acknowledgements ](#ack)
 
 <a name="capt"></a>
 ## [UI Lab Capture](https://github.com/donaldsonlab/UI-lab-capture)
@@ -76,3 +77,12 @@ The goal of this project was to create a GUI used for editing and cropping a vid
 <a name="vreg"></a>
 ## [Vole Surgery Registry](https://github.com/donaldsonlab/vole_surgery_registry)
 #### //TODO
+
+<a name="ack"></a>
+## [Acknowledgements](https://dudas.io/)
+* [ The Donaldson Lab ](http://www.zdonaldsonlab.com/)
+  * Zoe Donaldson
+  * David Protter
+  * Everyone else!
+* [ Nath, Mathis et al, 2019 ](http://www.mousemotorlab.org/deeplabcut)
+* [ RC @ CU Boulder ](https://www.colorado.edu/rc/)
