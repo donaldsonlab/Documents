@@ -64,6 +64,9 @@ Currently there is lots of fantastic data, but someone has to manually watch and
 The goal of this project was to create a GUI used for editing and cropping a video. For the lab's purposes, the video had 4 simultaneous vole operant experiments in a square-like pattern, or quadrants. For each of the quadrants, the user can enter as many voles as will fit on the GUI window. A vole has the following properties: a number, a starting time, an ending time. The GUI is hard coded for this specific use, but it can easily be adjusted by editing how the video is cropped in the import video function. To use effectively, the user should have the video up alongside the GUI.
 
 <p align="center">
+  <img width="460" height="300" src="Images/exquadvid.png">
+</p>
+<p align="center">
   <img src="Images/tkwindow.png">
 </p>
 <p align="center">
