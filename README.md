@@ -1,8 +1,6 @@
 # Lab Documents
 A repo to house various documents used by the lab.
 
-# Folders:
-
 ## [Chase](https://github.com/donaldsonlab/Documents/tree/master/Chase)
 #### [Scripts](https://github.com/donaldsonlab/Documents/tree/master/Chase/Scripts)
   * [Anaconda Environments](https://github.com/donaldsonlab/Documents/tree/master/Chase/Scripts/Anaconda%20Environments)
