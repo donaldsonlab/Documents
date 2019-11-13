@@ -41,3 +41,6 @@ Currently there is lots of fantastic data, but someone has to manually watch and
 <p align="center">
   <img width="460" height="300" src="Images/dlcgoal.gif">
 </p>
+<p align="center">
+  <img width="460" height="300" src="Images/dlc_model.png">
+</p>
