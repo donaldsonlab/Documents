@@ -89,4 +89,4 @@ The goal of this project was to create a GUI used for editing and cropping a vid
 * [ RC @ CU Boulder ](https://www.colorado.edu/rc/)
 
 
-### [ To Top ](#capt)
+### [ To Top ](#top)
