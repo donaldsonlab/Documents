@@ -32,7 +32,7 @@ The goal was to create a simple GUI to interface with scientific instruments. Th
   <img width="460" height="400" src="Images/UILabCapture.png">
 </p>
 
-## [Automating behavioral scoring using Deep Lab Cut](https://github.com/donaldsonlab/DonaldsonDLC)
+## [Automating Behavioral Scoring using Deep Lab Cut](https://github.com/donaldsonlab/DonaldsonDLC)
 Currently there is lots of fantastic data, but someone has to manually watch and score each and every frame which can take hours. In adition we can only ask basic questions, like “Did they mate?”. Using markerless pose estimation, we can begin to analyze and quantify behavioral scoring in areas like mating bouts, partner preferences, and operant paradigms. The project uses a convolutional neural network to analyze videos which returns a labeled video, a csv formatted file of poses, and other metadata about the analyzed video. The csv file is then processed using a python script and graphed to show the covariation of movement between two voles. When complete, this project will save the lab hours of time which previously would have been used to hand mark each video.
 
 <p align="center">
@@ -50,3 +50,9 @@ Currently there is lots of fantastic data, but someone has to manually watch and
 <p align="center">
   <img width="560" height="350" src="Images/covariation.png">
 </p>
+
+## [Vole Operant Quadrant Splitter](https://github.com/donaldsonlab/Documents/tree/master/Chase/Scripts/VoleOperantQuadrantSplitter)
+The goal of this project was to create a GUI used for editing and cropping a video. For the lab's purposes, the video had 4 simultaneous vole operant experiments in a square-like pattern, or quadrants. For each of the quadrants, the user can enter as many voles as will fit on the GUI window. A vole has the following properties: a number, a starting time, an ending time. The GUI is hard coded for this specific use, but it can easily be adjusted by editing how the video is cropped in the import video function. To use effectively, the user should have the video up alongside the GUI.
+
+## [Vole_Surgery_Registry](https://github.com/donaldsonlab/vole_surgery_registry)
+#### //TODO
