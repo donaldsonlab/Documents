@@ -77,7 +77,7 @@ The goal of this project was to create a GUI used for editing and cropping a vid
 
 <a name="vreg"></a>
 ## [Vole Surgery Registry](https://github.com/donaldsonlab/vole_surgery_registry)
-#### //TODO
+Previously completed by **Zach Nager**. This is a database created using Ruby on Rails to store information about surgeries preformed on voles. *Further details TBD*
 
 <a name="ack"></a>
 ## [Acknowledgements](https://dudas.io/)
