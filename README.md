@@ -24,12 +24,12 @@ A repo to house various documents used by the lab.
 #### [Summary](https://github.com/donaldsonlab/Documents/tree/master/Chase/Summary)
   * A list of the projects(with descriptions) that I completed for the lab.
   
-## Hardware Docs
-#### enginframe
+## [Hardware Docs](https://github.com/donaldsonlab/Documents/tree/master/Hardware%20Docs)
+#### [enginframe](https://github.com/donaldsonlab/Documents/tree/master/Hardware%20Docs/enginframe)
 
-#### PSEye.md
+#### [PSEye.md](https://github.com/donaldsonlab/Documents/blob/master/Hardware%20Docs/PSEye.md)
 
-#### RC_DeepLabCut_Instructions.md
+#### [RC_DeepLabCut_Instructions.md](https://github.com/donaldsonlab/Documents/blob/master/Hardware%20Docs/RC_DeepLabCut_Instructions.md)
 
-## Kathleen
-#### Kathleen_Scala_Text_File_Parser.ipynb
+## [Kathleen](https://github.com/donaldsonlab/Documents/tree/master/Kathleen)
+#### [Kathleen_Scala_Text_File_Parser.ipynb](https://github.com/donaldsonlab/Documents/blob/master/Kathleen/Kathleen_Scala_Text_File_Parser.ipynb)
