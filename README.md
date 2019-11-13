@@ -4,13 +4,15 @@ A repo to house various documents used by the lab.
 ## Folders
 
 ### Chase
-* OpenCV_Video_Graph_Seek
-  * video_analyzer.py
 
-* Scripts
+#### Scripts
+
   * Anaconda Environments
     * voleChopperEnvironment.yml
       * Environment used for scripts located in VoleOperantQuadrantSplitter
+      
+  * OpenCV_Video_Graph_Seek
+    * video_analyzer.py
 
   * VoleOperantQuadrantSplitter
     * voleChopper_OLD.py
@@ -21,7 +23,8 @@ A repo to house various documents used by the lab.
       * uses numpy slicing
       * *current working version*
 
-* Summary
+#### Summary
+
   * A list of the projects(with descriptions) that I completed for the lab.
   
 ### Hardware Docs
