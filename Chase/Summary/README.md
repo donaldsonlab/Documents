@@ -42,5 +42,11 @@ Currently there is lots of fantastic data, but someone has to manually watch and
   <img width="460" height="300" src="Images/dlcgoal.gif">
 </p>
 <p align="center">
-  <img width="460" height="300" src="Images/dlc_model.png">
+  <img width="460" height="350" src="Images/dlc_model.png">
+</p>
+<p align="center">
+  <img width="460" height="300" src="Images/DLC_Mating_Vod.gif">
+</p>
+<p align="center">
+  <img width="560" height="350" src="Images/covariation.png">
 </p>
