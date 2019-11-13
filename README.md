@@ -1,7 +1,7 @@
 # Lab Documents
 A repo to house various documents used by the lab.
 
-## [Chase](https://github.com/donaldsonlab/Documents/tree/master/Chase)
+## [Chase:](https://github.com/donaldsonlab/Documents/tree/master/Chase)
 #### [Scripts](https://github.com/donaldsonlab/Documents/tree/master/Chase/Scripts)
   * [Anaconda Environments](https://github.com/donaldsonlab/Documents/tree/master/Chase/Scripts/Anaconda%20Environments)
     * [voleChopperEnvironment.yml](https://github.com/donaldsonlab/Documents/blob/master/Chase/Scripts/Anaconda%20Environments/voleChopperEnvironment.yml)
@@ -22,12 +22,12 @@ A repo to house various documents used by the lab.
 #### [Summary](https://github.com/donaldsonlab/Documents/tree/master/Chase/Summary)
   * A list of the projects(with descriptions) that I completed for the lab.
   
-## [Hardware Docs](https://github.com/donaldsonlab/Documents/tree/master/Hardware%20Docs)
+## [Hardware Docs:](https://github.com/donaldsonlab/Documents/tree/master/Hardware%20Docs)
 #### [enginframe](https://github.com/donaldsonlab/Documents/tree/master/Hardware%20Docs/enginframe)
 
 #### [PSEye.md](https://github.com/donaldsonlab/Documents/blob/master/Hardware%20Docs/PSEye.md)
 
 #### [RC_DeepLabCut_Instructions.md](https://github.com/donaldsonlab/Documents/blob/master/Hardware%20Docs/RC_DeepLabCut_Instructions.md)
 
-## [Kathleen](https://github.com/donaldsonlab/Documents/tree/master/Kathleen)
+## [Kathleen:](https://github.com/donaldsonlab/Documents/tree/master/Kathleen)
 #### [Kathleen_Scala_Text_File_Parser.ipynb](https://github.com/donaldsonlab/Documents/blob/master/Kathleen/Kathleen_Scala_Text_File_Parser.ipynb)
