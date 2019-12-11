@@ -20,7 +20,7 @@ A repo to house various documents used by the lab.
       * *current working version*
 
 #### [Summary](https://github.com/donaldsonlab/Documents/tree/master/Chase/Summary)
-  * A list of the projects(with descriptions) that I completed for the lab.
+  * A list of the projects(with descriptions) that Chase Dudas completed for the lab.
   
 ## [Hardware Docs:](https://github.com/donaldsonlab/Documents/tree/master/Hardware%20Docs)
 #### [enginframe](https://github.com/donaldsonlab/Documents/tree/master/Hardware%20Docs/enginframe)
