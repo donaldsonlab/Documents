@@ -77,7 +77,23 @@ The goal of this project was to create a GUI used for editing and cropping a vid
 
 <a name="vreg"></a>
 ## [Vole Surgery Registry](https://github.com/donaldsonlab/vole_surgery_registry)
-Previously completed by **Zach Nager**. This is a database created using Ruby on Rails to store information about surgeries preformed on voles. *Further details TBD*
+Previously completed by **Zach Nager**. This is a database created with Ruby on Rails to store information about surgeries preformed on voles. I expanded on the CSS of the site, however the surgery functionality has yet to be implemented. I really enjoyed working on this project because it taught me Rails and let me explore different CSS and JS properties. 
+
+<p align="center">
+  <img title="Login/Landing Page" width="460" height="300" src="Images/DB_Login.png">
+</p>
+<p align="center">
+  <img title="Registration Page" width="460" height="300" src="Images/DB_Register.png">
+</p>
+<p align="center">
+  <img title="Dashboard Page" width="460" height="300" src="Images/DB_Dashboard.png">
+</p>
+<p align="center">
+  <img title="About Page" width="460" height="300" src="Images/DB_About.png">
+</p>
+<p align="center">
+  <img title="Profile Page" width="460" height="300" src="Images/DB_Profile.png">
+</p>
 
 <a name="ack"></a>
 ## [Acknowledgements](https://dudas.io/)
