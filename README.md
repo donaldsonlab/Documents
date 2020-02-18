@@ -18,6 +18,8 @@ A repo to house various documents used by the lab.
     * [voleChopper_v2.py](https://github.com/donaldsonlab/Documents/blob/master/Chase/Scripts/VoleOperantQuadrantSplitter/voleChopper_v2.py)
       * uses numpy slicing
       * *current working version*
+  * [QR_Creator](https://github.com/donaldsonlab/Documents/tree/master/Chase/Scripts/QR_Creator)
+    * [QR_Generator_Reader.ipynb](https://github.com/donaldsonlab/Documents/blob/master/Chase/Scripts/QR_Creator/QR_Generator_Reader.ipynb)
 
 #### [Summary](https://github.com/donaldsonlab/Documents/tree/master/Chase/Summary)
   * A list of the projects(with descriptions) that Chase Dudas completed for the lab.
